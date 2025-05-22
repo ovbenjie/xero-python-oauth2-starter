@@ -24,6 +24,8 @@ dictConfig(logging_settings.default_settings)
 app = Flask(__name__)
 app.config.from_object("default_settings")
 app.config.from_pyfile("config.py", silent=True)
+app.config["CLIENT_ID"] = os.environ.get('CLIENT_ID')
+app.config["CLIENT_SECRET"] = os.environ.get('CLIENT_SECRET')
 
 if app.config["ENV"] != "production":
     # allow oauth2 loop to run over http (used for local testing only)
